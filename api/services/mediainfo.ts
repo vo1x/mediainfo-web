@@ -18,7 +18,11 @@ export async function fetchMediaInfoFromGDrive(fileId: string) {
     const buffer = await response.arrayBuffer();
 
     const mediaInfo = await MediaInfo({
-      locateFile: () => "public/MediaInfoModule.wasm",
+      locateFile: (filename) => {
+        return `${
+          process.env.VERCEL_URL ? "https://" + process.env.VERCEL_URL : ""
+        }/public/${filename}`;
+      },
     });
 
     const mediaData = await mediaInfo.analyzeData(
@@ -33,6 +37,7 @@ export async function fetchMediaInfoFromGDrive(fileId: string) {
       mediaInfo: mediaData,
     };
   } catch (error) {
+    console.error("MediaInfo error:", error);
     return {
       success: false,
       message: `Error occurred: ${(error as Error).message}`,
