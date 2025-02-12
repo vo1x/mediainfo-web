@@ -17,10 +17,7 @@ export async function fetchMediaInfoFromGDrive(fileId: string) {
 
     const buffer = await response.arrayBuffer();
 
-    // Initialize MediaInfo with custom WASM path
-    const mediaInfo = await MediaInfo({
-      locateFile: (file) => `/MediaInfoModule.wasm`, // Ensure this matches the deployed path
-    });
+    const mediaInfo = await MediaInfo();
 
     const mediaData = await mediaInfo.analyzeData(
       () => buffer.byteLength,
