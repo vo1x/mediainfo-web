@@ -17,10 +17,9 @@ export async function fetchMediaInfoFromGDrive(fileId: string) {
 
     const buffer = await response.arrayBuffer();
 
+    // Initialize MediaInfo with custom WASM path
     const mediaInfo = await MediaInfo({
-      locateFile: (filename) => {
-        return `/${filename}`;
-      },
+      locateFile: (file) => `/MediaInfoModule.wasm`, // Ensure this matches the deployed path
     });
 
     const mediaData = await mediaInfo.analyzeData(
@@ -35,7 +34,6 @@ export async function fetchMediaInfoFromGDrive(fileId: string) {
       mediaInfo: mediaData,
     };
   } catch (error) {
-    console.error("MediaInfo error:", error);
     return {
       success: false,
       message: `Error occurred: ${(error as Error).message}`,

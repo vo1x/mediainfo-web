@@ -1,7 +1,9 @@
 {
   "name": "minfo",
   "scripts": {
-    "dev": "bun run --hot src/index.ts"
+    "dev": "bun run --hot src/index.ts",
+    "build": "bun build src/index.ts --outdir dist",
+    "postbuild": "cp node_modules/mediainfo.js/dist/MediaInfoModule.wasm dist/"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.8",

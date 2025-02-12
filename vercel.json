@@ -1,8 +1,14 @@
 {
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/api"
-    }
-  ]
-}
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/api"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/MediaInfoModule.wasm",
+        "dest": "/MediaInfoModule.wasm"
+      }
+    ]
+  }
