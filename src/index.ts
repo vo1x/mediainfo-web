@@ -12,5 +12,7 @@ app.get("/drive/ddl", getMetadataController);
 
 // export default app;
 
-export const GET = handle(app);
-export const POST = handle(app);
+const handler = handle(app);
+
+export const GET = handler;
+export const POST = handler;
