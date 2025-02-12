@@ -1,10 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/MediaInfoModule.wasm",
-      "destination": "/public/MediaInfoModule.wasm"
-    },
-    {
       "source": "/(.*)",
       "destination": "/api"
     }
