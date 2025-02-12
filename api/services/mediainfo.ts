@@ -19,9 +19,7 @@ export async function fetchMediaInfoFromGDrive(fileId: string) {
 
     const mediaInfo = await MediaInfo({
       locateFile: (filename) => {
-        return `${
-          process.env.VERCEL_URL ? "https://" + process.env.VERCEL_URL : ""
-        }/public/${filename}`;
+        return `https://mediainfo-web.vercel.app/${filename}`;
       },
     });
 
