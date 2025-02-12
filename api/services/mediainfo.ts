@@ -18,7 +18,7 @@ export async function fetchMediaInfoFromGDrive(fileId: string) {
     const buffer = await response.arrayBuffer();
 
     const mediaInfo = await MediaInfo({
-      locateFile: () => `/MediaInfoModule.wasm`,
+      locateFile: () => "public/MediaInfoModule.wasm",
     });
 
     const mediaData = await mediaInfo.analyzeData(
