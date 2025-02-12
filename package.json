@@ -1,7 +1,9 @@
 {
   "name": "minfo",
   "scripts": {
-    "dev": "bun run --hot api/index.ts"
+    "dev": "bun run --hot api/index.ts",
+    "build": "bun build ./api/index.ts --target=bun",
+    "vercel-build": "mkdir -p .vercel/output/functions/api && cp node_modules/mediainfo.js/dist/MediaInfoModule.wasm .vercel/output/functions/api/"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.8",

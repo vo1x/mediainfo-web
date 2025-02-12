@@ -1,8 +1,19 @@
 {
+  "version": 2,
+  "functions": {
+    "api/**/*": {
+      "runtime": "vercel-bun@1.0.0"
+    }
+  },
   "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/api"
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "VERCEL": "1"
+    }
+  }
 }

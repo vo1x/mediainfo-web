@@ -1,4 +1,5 @@
 import MediaInfo from "mediainfo.js";
+import * as path from "path";
 
 export async function fetchMediaInfoFromGDrive(fileId: string) {
   const apiKey = `AIzaSyDc8qlDH2gjT0liG-pAs-IpDDVtO7134K4`;
@@ -17,7 +18,18 @@ export async function fetchMediaInfoFromGDrive(fileId: string) {
 
     const buffer = await response.arrayBuffer();
 
-    const mediaInfo = await MediaInfo();
+    const mediaInfo = await MediaInfo({
+      locateFile: (fileName: string) => {
+        if (process.env.VERCEL) {
+          return path.join(
+            process.cwd(),
+            "node_modules/mediainfo.js/dist",
+            fileName
+          );
+        }
+        return fileName;
+      },
+    });
 
     const mediaData = await mediaInfo.analyzeData(
       () => buffer.byteLength,
@@ -31,6 +43,7 @@ export async function fetchMediaInfoFromGDrive(fileId: string) {
       mediaInfo: mediaData,
     };
   } catch (error) {
+    console.error("MediaInfo error:", error);
     return {
       success: false,
       message: `Error occurred: ${(error as Error).message}`,
