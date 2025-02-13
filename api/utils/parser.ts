@@ -16,6 +16,7 @@ export function parseMediaInfo(
   const videoInfo = mediaInfo.media.track.find(
     (track: any) => track["@type"] === "Video"
   );
+
   const audioTracks = mediaInfo.media.track.filter(
     (track: any) => track["@type"] === "Audio"
   );
